@@ -1,0 +1,19 @@
+{
+  "name": "PercentRead",
+  "version": "0.0.1",
+  "title": "Show your users what percentage of your page they've read",
+  "author": {
+    "name": "Matt Harmes",
+    "email": "mattharmes@gmail.com",
+    "url": "harmes.ca"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://opensource.org/licenses/MIT"
+    }
+  ],
+  "dependencies": {
+    "jquery": ">=1.9"
+  }
+}
