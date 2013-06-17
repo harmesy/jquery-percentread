@@ -4,12 +4,12 @@
   var $window = $(window),
     $document = $(document);
 
-  // trigger the event right off the bat so the amount is set right away
-  $document.ready(function() {
-    $window.trigger("scroll.percentRead")
-  });
-
   $.percentRead = function(report_element) {
+    // trigger the event right off the bat so the amount is set right away
+    $document.ready(function() {
+      $window.trigger("scroll.percentRead")
+    });
+    
     function reportPercentage(percent) {
       $(report_element).text(parseInt(percent) + "%");
     }
