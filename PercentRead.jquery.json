@@ -1,7 +1,7 @@
 {
   "name": "PercentRead",
-  "version": "0.0.1",
-  "title": "Show your users what percentage of your page they've read",
+  "version": "0.0.2",
+  "title": "jQuery - Percent Read",
   "author": {
     "name": "Matt Harmes",
     "email": "mattharmes@gmail.com",
@@ -15,5 +15,6 @@
   ],
   "dependencies": {
     "jquery": ">=1.9"
-  }
+  },
+  "description": "jQuery-PercentRead is a simple jQuery plugin that lets you show your user how much of your page (or content) they've read."
 }
