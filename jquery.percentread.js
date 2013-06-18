@@ -56,7 +56,12 @@
       reportPercentage(calcPercentage(targetAreaHeight, targetAreaScrollAmount));
     });
 
+    // trigger the scroll event handler when the window is resized as well
+    $window.on('resize.percentRead', function() {
+      $window.trigger('scroll.percentRead');
+    });
+
     // trigger the event right off the bat so the amount is set right away
-    $window.trigger("scroll.percentRead")
+    $window.trigger('scroll.percentRead');
   }
 })(jQuery);
