@@ -5,7 +5,7 @@ jQuery-PercentRead is a simple jQuery plugin that lets you show your user how mu
 ## Usage ##
 Call the `$.fn.percentRead()` function on the DOM object that you want to use to report the status to the user.
 You can pass in an options hash to customize certain settings. At the moment the only two options are `template` and `targetArea`.
-* `template`: Pass in a string template of how you want the status to be shown. Anything between the `{{` and `}}` will be replaced with the current percentage. ex. `"You've read {{per}}%"`. Defaults to `"{{percent}}%"`
+* `template`: How you want the output to be rendered. You can pass in a string which will be appended, or you can pass in a function, which accepts the percent parameter, and should return a string version of what you want shown. If a string is not passed in, or returned from the function then only the percent will be returned. ex. `template: function(percent) { return percent + "%" }`. Defaults to `undefined`.
 * `targetArea`: When you want to show the user how much of a particular element they've scrolled through, rather than the entire document. For example, with a blog or news site you could set it to show the percentage of the article that they've scrolled through. ex. `targetArea: "#post"`. Defaults to `document`.
 
 ## Testing ##

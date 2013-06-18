@@ -4,7 +4,7 @@
   var $window = $(window);
 
   var defaults = {
-    template: "{{percent}}%",
+    template: undefined,
     targetArea: document
   };
 
@@ -12,9 +12,19 @@
     var _self = this;
     options = $.extend({}, defaults, options);
 
-    // replace anything between {{ and }} with the percentage
     function reportPercentage(percent) {
-      $(_self).html(options.template.replace(/\{\{(\w+)\}\}/, parseInt(percent)));
+      var percent = parseInt(percent);
+      var output;
+
+      if(typeof options.template === 'function') {
+        output = options.template(percent)
+
+        $(_self).html(typeof output === 'string' ? output : percent);
+      } else if(typeof options.template === 'string') {
+        $(_self).html(percent + options.template);
+      } else {
+        $(_self.html(percent));
+      }
     }
 
     function calcPercentage(totalHeight, scrollAmount) {
@@ -41,8 +51,6 @@
         reportPercentage(100);
         return;
       }
-
-      console.log(targetAreaTop);
 
       // actually report the amount scrolled
       reportPercentage(calcPercentage(targetAreaHeight, targetAreaScrollAmount));
