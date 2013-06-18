@@ -6,17 +6,19 @@
   <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
   <script src="../jquery.percentread.js"></script>
   <script>
-    $.percentRead("#percent_read");
+    $(document).ready(function() {
+      $("#percent_read").percentRead({targetArea: "#body"});
+    });
   </script>
 </head>
 <body>
-  <header>
+  <header style="height: 200px">
     <span id="percent_read" style="position: fixed; top: 0">0%</span>
   </header>
   <div id="body" style="height: 2000px; margin: 40px auto">
     #body content
   </div>
-  <footer>
+  <footer style="height: 200px">
     #footer content
   </footer>
 </body>
