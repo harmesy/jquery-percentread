@@ -4,26 +4,18 @@
   var $window = $(window);
 
   var defaults = {
-    template: undefined,
+    callback: undefined,
     targetArea: document
   };
 
-  $.fn.percentRead = function(options) {
-    var _self = this;
+  $.percentRead = function(options) {
     options = $.extend({}, defaults, options);
 
-    function reportPercentage(percent) {
-      var percent = parseInt(percent);
-      var output;
-
-      if(typeof options.template === 'function') {
-        output = options.template(percent)
-
-        $(_self).html(typeof output === 'string' ? output : percent);
-      } else if(typeof options.template === 'string') {
-        $(_self).html(percent + options.template);
-      } else {
-        $(_self.html(percent));
+    function runCallback(percent) {
+      var percent = parseInt(percent, 10);
+      
+      if(options.callback) {
+        options.callback(percent);
       }
     }
 
@@ -32,7 +24,7 @@
     }
 
     // actual event handler
-    $window.on('scroll.percentRead', function() {
+    $window.on('scroll.percentRead resize.percentRead', function() {
       var windowHeight = $window.height(),
         targetArea = $(options.targetArea),
         targetAreaHeight = targetArea.height(),
@@ -45,20 +37,15 @@
       // but if we've read past the area we need to set the percent
       // to 100
       if(parseInt(totalScrollAmount) <= parseInt(targetAreaTop)) {
-        reportPercentage(0);
+        runCallback(0);
         return;  
       } else if(parseInt(totalScrollAmount) >= parseInt(targetAreaTop + targetAreaHeight)) {
-        reportPercentage(100);
+        runCallback(100);
         return;
       }
 
       // actually report the amount scrolled
-      reportPercentage(calcPercentage(targetAreaHeight, targetAreaScrollAmount));
-    });
-
-    // trigger the scroll event handler when the window is resized as well
-    $window.on('resize.percentRead', function() {
-      $window.trigger('scroll.percentRead');
+      runCallback(calcPercentage(targetAreaHeight, targetAreaScrollAmount));
     });
 
     // trigger the event right off the bat so the amount is set right away
